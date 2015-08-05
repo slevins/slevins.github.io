@@ -1,0 +1,60 @@
+
+<li class="slide" id="<%= ((cityData.city).split(' ').join('')).toLowerCase() %>">
+<div class="current-city">
+    <div class="current-city-head">
+        <div class="time-refresh-block">
+            <time class="time-now"></time>
+            <span class="icon icon-refresh"></span></div>
+        <div class="current-city-name"><%= (cityData.city).toUpperCase() %></div>
+        <div class="date-today"><%= (['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date().getDay()] + ', ' +
+            ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][new Date().getMonth()] +
+            ' ' + new Date().getDate()).toUpperCase() %>
+        </div>
+        <div class="weather-today">
+            <div class="icon icon-<%= cityData.currently.icon %>"></div>
+            <div class="current-state">
+                <div class="temperature convert"><%= Math.round(cityData.currently.temperature) %></div>
+                <div class="state-description">// <%= cityData.currently.summary %></div>
+            </div>
+            <div class="moon-set">
+                <div class="icon icon-almost-old"></div>
+                <time><%= cityData.daily.data[1].moonPhase %></time>
+            </div>
+        </div>
+    </div>
+    <div class="weather-for-day">
+        <ul>
+            <% _.forEach(cityData.hourly.data, function(value, key){ if(key == 24){return false}%>
+            <li>
+                <time><%= new Date(value.time * 1000).getHours() + ':00' %></time>
+                <div class="icon icon-<%= value.icon %>"></div>
+                <div class="temperature convert"><%= Math.round(value.temperature) %></div>
+            </li>
+            <% }); %>
+        </ul>
+    </div>
+    <ul class="weather-params">
+        <li>
+            <div class="icon icon-humidity"></div>
+            <div class="humidity"><%= Math.round(cityData.currently.humidity * 100) + '%' %></div>
+        </li>
+        <li>
+            <div class="icon icon-wind-direction"></div>
+            <div class="wind"><%= Math.round(cityData.currently.windSpeed) %></div>
+        </li>
+        <li>
+            <div class="icon icon-sunrise"></div>
+            <div class="sunrise"><%= new Date(new Date().setHours(new Date(cityData.daily.data[1].sunriseTime * 1000).getHours()+ cityData.offset)).getUTCHours() + ':' + new Date(cityData.daily.data[1].sunriseTime * 1000).getMinutes() %></div>
+        </li>
+        <li>
+            <div class="icon icon-sunset"></div>
+            <div class="sunset"><%= new Date(new Date().setHours(new Date(cityData.daily.data[1].sunsetTime * 1000).getHours()+ cityData.offset)).getUTCHours() + ':' + new Date(cityData.daily.data[1].sunsetTime * 1000).getMinutes() %></div>
+        </li>
+    </ul>
+</div>
+<div class="sun-block">
+    <span class="center"></span>
+    <span class="middle"></span>
+    <span class="out"></span>
+</div>
+</li>

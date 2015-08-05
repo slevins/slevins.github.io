@@ -1,0 +1,812 @@
+/* Fonts */
+@font-face {
+    font-family: "ptsans";
+    src: url("../fonts/ptsans-narrow/ptn57f-webfont.eot");
+    src: url("../fonts/ptsans-narrow/ptn57f-webfont.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/ptsans-narrow/ptn57f-webfont.woff") format("woff"),
+    url("../fonts/ptsans-narrow/ptn57f-webfont.woff2") format("woff2"),
+    url("../fonts/ptsans-narrow/ptn57f-webfont.ttf") format("truetype"),
+    url("../fonts/ptsans-narrow/ptn57f-webfont.svg#sunny4") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    line-height: 1.2;
+    color: #fff;
+    font-family: "ptsans", "Myriad Pro", Arial, sans-serif;
+    font-size: 62.5%;
+}
+
+.icon {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.temperature {
+    line-height: 1;
+}
+
+.temperature::after {
+    content: 'o';
+    display: inline-block;
+    font-size: 50%;
+    line-height: 60%;
+    vertical-align: top;
+}
+
+/* Styles for scrolls */
+.horizontal-track {
+    height: 8px;
+    background: rgba(8, 11, 34, 0.3);
+
+}
+
+.horizontal-track > a {
+    height: 10px;
+    width: 110px;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    top: -1px;
+    background: #ffffff;
+}
+
+.vertical-track {
+    width: 10px;
+    background: #080a20;
+}
+
+.vertical-track a {
+    width: 12px;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    left: -1px;
+    background: #ffffff;
+}
+
+/* Styles for sun */
+.sun-block{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 500px;
+    height: 500px;
+    z-index: 5;
+}
+
+.sun-block .center{
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(#fff000 1%, rgba(255, 240, 0, 0) 42%);
+}
+
+.sun-block .middle{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 7;
+    background: radial-gradient(#fff000 45%, rgba(255, 240, 0, 0) 65%);
+}
+
+.sun-block .out{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 8;
+    background: radial-gradient(#ff5400 45%, rgba(255, 84, 0, 0) 65%);
+}
+
+/* Common styles */
+#wrapper {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+
+.main-slider {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.main-slider > ul {
+    overflow: hidden;
+    position: relative;
+    width: 1000%;
+    height: 100%;
+    background: #080b22;
+}
+
+.slide {
+    width: 10%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    float: left;
+}
+
+.slide.active-night {
+    background-color: #080b22;
+}
+
+.slide.active-morning {
+    background-color: #ff7200;
+}
+
+.active-afternoon {
+    background-color: #176ef1;
+}
+
+.slide.active-rain {
+    background-image: url(../images/rain.png);
+    background-repeat: repeat;
+    animation: animRain 50s infinite linear;
+    -webkit-animation: animRain 50s infinite linear;
+}
+
+@-webkit-keyframes animRain {
+    from {
+        background-position: 0 0
+    }
+    to {
+        background-position: -500% 1000%
+    }
+}
+
+@keyframes animRain {
+    from {
+        background-position: 0 0
+    }
+    to {
+        background-position: -500% 1000%
+    }
+}
+
+.slide.active-snow {
+    background-image: url(../images/snow.png);
+    background-repeat: repeat;
+    animation: animSnow 50s infinite linear;
+    -webkit-animation: animSnow 50s infinite linear;
+}
+
+@-webkit-keyframes animSnow {
+    from {
+        background-position-y: 0
+    }
+    to {
+        background-position-y: 1000%
+    }
+}
+
+@keyframes animSnow {
+    from {
+        background-position-y: 0
+    }
+    to {
+        background-position-y: 1000%
+    }
+}
+
+/* Styles for pagination */
+#pagination {
+    position: absolute;
+    top: 93%;
+    left: 30%;
+    z-index: 100;
+    overflow: hidden;
+}
+
+#pagination a {
+    float: left;
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border-radius: 10px;
+    border: 3px solid #fff;
+    margin-right: 30px;
+}
+
+a.active-pagination {
+    background: #ffffff;
+}
+
+/* Left column current city */
+.current-city {
+    width: 31.5%;
+    float: left;
+    padding: 0 2% 0 1%;
+}
+
+.current-city-head {
+    border-bottom: 3px solid rgba(255, 255, 255, 0.5);
+    padding: 10px 0 60px;
+}
+
+.time-refresh-block {
+    padding: 0 0 14px 0;
+}
+
+.time-now {
+    font-size: 3em;
+    letter-spacing: -2px;
+}
+
+.icon-refresh {
+    font-size: 5em;
+    line-height: 40px;
+    height: 30px;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.current-city-name {
+    font-size: 7.5em;
+    line-height: 1;
+    letter-spacing: 6px;
+    margin-bottom: -5px;
+}
+
+.date-today {
+    font-size: 4em;
+    letter-spacing: 4px;
+    margin-bottom: 65px;
+}
+
+.weather-today {
+    overflow: hidden;
+}
+
+.weather-today .icon {
+    float: left;
+    font-size: 17em;
+    height: 125px;
+    line-height: 160px;
+}
+
+.current-state {
+    float: left;
+    margin: 0 10px;
+}
+
+.weather-today .temperature {
+    font-size: 10em;
+    margin-bottom: -5px;
+}
+
+.state-description {
+    letter-spacing: -2px;
+    font-size: 3em;
+    text-align: right;
+    float: left;
+}
+
+.moon-set {
+    float: right;
+    margin: 20px 17px 0 0;
+}
+
+.moon-set .icon-almost-old {
+    float: none;
+    font-size: 8em;
+    line-height: 50px;
+    height: 50px;
+    margin-bottom: 12px;
+}
+
+.moon-set time {
+    font-size: 30px;
+    display: block;
+}
+
+.weather-for-day {
+    overflow-x: scroll;
+    height: 216px;
+}
+
+.weather-for-day ul {
+    overflow: hidden;
+    width: 600%;
+    padding: 30px 0;
+}
+
+.weather-for-day li {
+    float: left;
+    width: 4.16%;
+    text-align: center;
+}
+
+.weather-for-day time {
+    display: block;
+    font-size: 2em;
+}
+
+.weather-for-day .icon {
+    font-size: 7em;
+    height: 70px;
+}
+
+.weather-for-day .temperature {
+    font-size: 4em;
+}
+
+.weather-params {
+    overflow: hidden;
+    width: 100%;
+    font-size: 4em;
+    padding: 20px 0;
+}
+
+.weather-params li {
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+
+.weather-params .icon {
+    font-size: 2em;
+    height: 80px;
+    margin-bottom: -12px;
+}
+
+.wind::after {
+    content: 'm/c';
+    display: inline-block;
+    vertical-align: top;
+    font-size: 20px;
+    margin-top: 3px;
+}
+
+/* Show weather for match days */
+.weather-by-days {
+    position: relative;
+    z-index: 20;
+    width: 31.5%;
+    float: left;
+    margin: 18px 0 110px;
+}
+
+.holder-days {
+    overflow: hidden;
+    height: 346px;
+}
+
+.weather-by-days ul {
+    background: rgba(255, 255, 255, .2);
+    padding: 0 33px;
+}
+
+.weather-by-days li {
+    border-top: 3px solid rgba(255, 255, 255, 0.5);
+    padding: 40px 0 32px;
+    position: relative;
+}
+
+.weather-by-days li:first-child {
+    border-top: 0;
+}
+
+.weather-by-days .day {
+    font-size: 3.5em;
+}
+
+.weather-by-days .icon {
+    position: absolute;
+    top: 42px;
+    left: 90px;
+    line-height: 50px;
+    font-size: 5.5em;
+    height: 45px;
+}
+
+.range-temp {
+    position: absolute;
+    top: 45px;
+    left: 200px;
+    font-size: 3.5em;
+}
+
+.range-temp div {
+    display: inline-block;
+}
+
+.range-temp .range {
+    width: 100px;
+    height: 36px;
+    border-radius: 18px;
+    -webkit-border-radius: 18px;
+    background: #fff;
+}
+
+.range-temp .temperature {
+    vertical-align: 5px;
+}
+
+/* Aside right column */
+.aside-menu {
+    position: absolute;
+    z-index: 100;
+    right: -32%;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 32%;
+    background: #081322;
+    transition: all 1s;
+    -webkit-transition: all 1s;
+}
+
+.aside-menu.active-aside {
+    right: 0
+}
+
+.controls {
+    overflow: hidden;
+    height: 7%;
+    box-sizing: border-box;
+    font-size: 4em;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.5);
+    padding: 17px 47px 10px 0;
+    margin-left: 40px;
+}
+
+.controls .icon-menu {
+    float: left;
+    height: 40px;
+    position: absolute;
+    left: -60px;
+    top: 18px;
+    cursor: pointer;
+    transition: all 1s;
+    -webkit-transition: all 1s;
+}
+
+.controls .icon-menu.active-menu {
+    left: 40px;
+}
+
+.controls .icon-delete {
+    float: right;
+    height: 40px;
+    cursor: pointer;
+}
+
+.controls .icon-add {
+    float: right;
+    height: 40px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.icon-delete:hover,
+.icon-add:hover {
+    color: #ff4200;
+}
+
+.search-form {
+    float: right;
+    position: relative;
+    width: 60%;
+    height: 36px;
+    margin: 3px 25px 0 0;
+    display: none;
+}
+
+.search-form.active-search-form {
+    display: block;
+}
+
+#search {
+    border: 0;
+    outline: none;
+    background: #c1c4c8;
+    color: #000;
+    display: block;
+    height: 100%;
+    width: 100%;
+    border-radius: 18px;
+    -webkit-border-radius: 18px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-size: 30px;
+    padding: 3px 15px;
+}
+
+#submit-form {
+    display: none;
+}
+
+.search-form .icon-check {
+    position: absolute;
+    top: 0;
+    right: -65px;
+    background: #081322;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+.search-form .icon-check:hover {
+    color: #ff4200;
+}
+
+/* styles for autocomplete */
+.pac-container {
+    font-family: "ptsans", "Myriad Pro", Arial, sans-serif;
+    width: 32% !important;
+    height: 48%;
+    top: 88px !important;
+    left: 68% !important;
+    background: #081322;
+    border: 0;
+}
+
+.pac-container::after {
+    display: none;
+}
+
+.pac-icon {
+    display: none;
+}
+
+.pac-item {
+    color: #c1c4c8;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.5);
+    border-top: 0;
+    cursor: pointer;
+    font-size: 30px;
+    line-height: 53px;
+    display: block;
+    padding: 30px 5px 20px 10px;
+    margin-left: 40px;
+}
+
+.pac-item:hover {
+    background: #081322;
+}
+
+.pac-item-query {
+    color: #fff;
+    font-size: 60px;
+}
+
+.pac-item-selected{
+    background: #081322;
+}
+
+/* End styles for autocomplete */
+
+.added-cities .check-box {
+    position: absolute;
+    top: 25px;
+    right: 15px;
+}
+
+.check-box input {
+    display: none;
+}
+
+.checked-area {
+    width: 30px;
+    height: 30px;
+    border-radius: 1px;
+    -webkit-border-radius: 1px;
+    background: #000;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    top: 10px;
+}
+
+.added-cities .icon-check {
+    color: #ff4200;
+    font-size: 3em;
+    position: absolute;
+    top: 0;
+    left: 4px;
+    display: none;
+}
+
+.check-box input:checked + div {
+    display: block;
+}
+
+.added-cities {
+    width: auto !important;
+    height: 48%;
+    overflow-y: scroll;
+    padding-left: 40px;
+}
+
+.added-cities li {
+    position: relative;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+.added-cities a {
+    overflow: hidden;
+    display: block;
+    color: #fff;
+    padding: 30px 55px 20px 0;
+}
+
+.added-cities a > .icon {
+    color: #a5a7a9;
+    font-size: 7em;
+    line-height: 65px;
+    height: 50px;
+    float: left;
+    margin-right: 15px;
+}
+
+.added-cities .temperature {
+    font-size: 6em;
+    float: left;
+    margin-right: 15px;
+}
+
+.weather-description {
+    float: left;
+    margin-right: 15px;
+}
+
+.weather-description .city {
+    font-size: 3em;
+}
+
+.weather-description .city-weather {
+    font-size: 2em;
+    letter-spacing: -2px;
+    color: #a5a7a9;
+}
+
+.settings {
+    position: absolute;
+    bottom: 0;
+    height: 45%;
+    width: 100%;
+    box-sizing: border-box;
+    background: #152132;
+    padding: 12px 0 10px 45px;
+}
+
+.settings-head {
+    overflow: hidden;
+    padding: 0 43px 18px 0;
+}
+
+.switch-temperature {
+    float: left;
+    overflow: hidden;
+}
+
+.switch-temperature span {
+    font-size: 4em;
+    line-height: 35px;
+    height: 40px;
+    color: #6e7279;
+    cursor: pointer;
+    float: left;
+}
+
+.switch-temperature span::before {
+    content: 'o';
+    font-size: 50%;
+    line-height: 60%;
+    vertical-align: top;
+}
+
+.switch-temperature span.active {
+    color: #fff;
+}
+
+.celsius {
+    margin: 15px 55px 0 5px;
+}
+
+.faring {
+    margin: 15px 0 0 38px;
+}
+
+.vertical-line {
+    width: 2px;
+    height: 55px;
+    background: #6e7279;
+    float: left;
+}
+
+span.active-temperature {
+    color: #fff;
+}
+
+.settings-head .icon-settings {
+    float: right;
+    font-size: 4em;
+    line-height: 35px;
+    height: 32px;
+    padding-top: 23px;
+}
+
+.range-holder {
+    border-top: 3px solid #505965;
+    padding: 32px 0 90px;
+}
+
+.range-box {
+    font-size: 2.5em;
+    position: relative;
+    margin: 0 55px 0 20px;
+}
+
+.range-box::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.range-title {
+    float: left;
+    line-height: 34px;
+    color: #6e7279;
+    padding: 0 10px 0 0;
+}
+
+.amount-item {
+    float: right;
+    padding: 1px 0 0 5px;
+}
+
+.slider-container {
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    z-index: 10;
+}
+
+.range-box .theme-green .back-bar .selected-bar {
+    background: #ff4200;
+}
+
+.range-box .theme-green .back-bar {
+    background: #0a1019;
+}
+
+.range-box .theme-green .back-bar .pointer {
+    position: relative;
+    top: -11px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    background: #ffffff;
+}
+
+.range-box .theme-green .back-bar .pointer::after {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    background: #081322;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+}
+
+.range-box .slider-container .back-bar .pointer-label {
+    color: #fff;
+    background: none;
+    font-size: 30px;
+    font-family: "ptsans", "Myriad Pro", Arial, sans-serif;
+    top: -60px;
+    right: 50px;
+}
