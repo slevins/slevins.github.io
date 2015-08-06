@@ -11,9 +11,10 @@ body {
 
 #messageArea {
     position: absolute;
-    top: 0;
+    top: 10px;
     left: 0;
-    color: rgb(83, 175, 19);
+    color: red;
+    font: 30px Arial, sans-serif;
 }
 .hit {
     background: url("../images/ship.png") no-repeat center center;
