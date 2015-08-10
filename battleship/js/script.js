@@ -2,8 +2,10 @@ window.onload = init;
 
 function init(){
     var fire = document.getElementById('form');
+    var table = document.getElementById('table');
 
     fire.onsubmit = handlerFireButton;
+    table.onclick = handlerFireClick;
     model.generateShipLocations();
 }
 
@@ -138,20 +140,30 @@ var controller = {
 
 };
 
-//
 function parseShot(shot){
-    var arr = ['a','b','c','d','e','f','g'];
+    var arrChar = ['a','b','c','d','e','f','g'];
+    var arrNum = ['0','1','2','3','4','5','6'];
+    var indexRow;
 
     if(shot === null || shot.length !== 2){
         alert("Некорректно введены данные")
     }else{
-        var firstChar = (shot.charAt(0)).toLowerCase();
-        var indexRow = arr.indexOf(firstChar);
+        var firstChar = shot.charAt(0);
+        var indexChar = arrChar.indexOf(firstChar.toLowerCase());
+        var indexNum = arrNum.indexOf(firstChar);
+
+        if(indexChar >= 0){
+            indexRow = indexChar;
+        }else if(indexNum >= 0){
+            indexRow = indexNum;
+        }
+
         var indexColumn = shot.charAt(1);
         var coordinates = indexRow + indexColumn;
 
-        if(indexRow < 0 || isNaN(indexColumn)){
-            alert('Что за херню ты ввёл??')
+
+        if( (indexChar < 0 && indexNum < 0) || isNaN(indexColumn)){
+            alert('Что за херню ты ввёл??');
         }else if(indexRow >= model.boardSize || indexColumn < 0 || indexColumn >= model.boardSize){
             alert('Координаты вне предела доски')
         }else if(model.arrHits.indexOf(coordinates) >= 0){
@@ -171,5 +183,13 @@ function handlerFireButton(){
     input.value = '';
     input.focus();
 
+    return false;
+}
+
+function handlerFireClick(event){
+    var target = event.target;
+    var value = target.getAttribute('id');
+
+    controller.processShot(value);
     return false;
 }
